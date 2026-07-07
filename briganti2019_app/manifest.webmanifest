@@ -1,0 +1,10 @@
+{
+  "name":"Briganti 2019 LNI",
+  "short_name":"Briganti LNI",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#f4f7fb",
+  "theme_color":"#0f4c81",
+  "description":"Calculadora móvil del nomograma Briganti/Gandaglia 2019 para riesgo de invasión ganglionar.",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]
+}

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f4c81" />
+  <title>Briganti 2019 LNI</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --ink:#132238; --muted:#5d6b7a;
+      --primary:#0f4c81; --primary2:#1769aa; --line:#d8e1ec;
+      --green:#0f7b4a; --amber:#b7791f; --red:#b91c1c; --softblue:#e8f2fb;
+      --shadow:0 8px 24px rgba(15,76,129,.12); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    header{background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;padding:22px 18px 26px;border-bottom-left-radius:26px;border-bottom-right-radius:26px;box-shadow:var(--shadow)}
+    .wrap{max-width:920px;margin:0 auto;padding:0 14px 24px}
+    h1{font-size:1.42rem;margin:0 0 4px;font-weight:760;letter-spacing:.1px}
+    .subtitle{font-size:.92rem;opacity:.92;margin:0}
+    .creatorHero{margin-top:10px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.24);border-radius:13px;padding:9px 11px;box-shadow:0 5px 14px rgba(0,0,0,.05)}
+    .creatorHero .kicker{display:inline;font-size:.70rem;text-transform:uppercase;letter-spacing:.06em;font-weight:760;opacity:.78;margin-right:6px}
+    .creatorHero .name{display:inline;font-size:.88rem;font-weight:760;line-height:1.22}
+    .creatorHero .desc{font-size:.76rem;opacity:.86;margin-top:3px;line-height:1.28}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}
+    @media(min-width:860px){.grid{grid-template-columns:1.1fr .9fr}.span{grid-column:1/-1}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .card h2{font-size:1.05rem;margin:0 0 12px;color:var(--primary)}
+    label{display:block;font-weight:680;margin:12px 0 6px}
+    .hint{display:block;color:var(--muted);font-size:.82rem;font-weight:500;margin-top:2px}
+    input,select{width:100%;font:inherit;padding:12px 11px;border:1px solid #bcc9d8;border-radius:12px;background:#fff;color:var(--ink)}
+    input:focus,select:focus{outline:3px solid #cce6ff;border-color:var(--primary2)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .resultBox{display:grid;gap:12px}
+    .risk{padding:18px;border-radius:16px;background:var(--softblue);text-align:center;border:1px solid #c5dcef}
+    .risk .num{font-size:2.45rem;font-weight:800;color:var(--primary);line-height:1;margin:6px 0}
+    .risk .label{color:var(--muted);font-weight:600}
+    .badge{display:inline-block;padding:8px 12px;border-radius:999px;font-weight:760;font-size:.92rem}
+    .badge.green{background:#dff4e9;color:var(--green)}
+    .badge.amber{background:#fff1d6;color:var(--amber)}
+    .badge.red{background:#fee2e2;color:var(--red)}
+    .recommend{border-radius:14px;padding:12px 13px;font-weight:680}
+    .recommend.green{background:#e7f6ed;color:var(--green);border:1px solid #b7e1c8}
+    .recommend.amber{background:#fff6df;color:#8a5b12;border:1px solid #eed49a}
+    .recommend.red{background:#fde8e8;color:var(--red);border:1px solid #f5b8b8}
+    .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .metric{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px}
+    .metric b{display:block;color:var(--primary);font-size:1.05rem}
+    .metric span{font-size:.78rem;color:var(--muted)}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    button{font:inherit;font-weight:750;border:0;border-radius:13px;padding:12px 10px;cursor:pointer}
+    .primary{background:var(--primary);color:white}.secondary{background:#e6edf5;color:#17324d}.danger{background:#fee2e2;color:var(--red)}
+    .warning{background:#fff7d6;border:1px solid #ead58f;color:#514018;border-radius:14px;padding:12px;font-size:.87rem}
+    table{width:100%;border-collapse:collapse;font-size:.86rem;overflow:hidden;border-radius:12px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{background:#eef4fa;color:#24425d;font-weight:760}
+    .tableWrap{overflow:auto;max-height:320px;border:1px solid var(--line);border-radius:14px}
+    .small{font-size:.82rem;color:var(--muted)}
+    footer{padding:18px 4px;color:var(--muted);font-size:.78rem;text-align:center}
+    footer .credit{margin-top:6px;font-size:.72rem;opacity:.75}
+    @media print{header,.actions,.noPrint{display:none!important}body{background:white}.card{box-shadow:none;border:1px solid #ccc}.grid{display:block}.card{margin-bottom:14px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Briganti / Gandaglia 2019</h1>
+    <p class="subtitle">Calculadora móvil de riesgo de invasión ganglionar — LNI — basada en el nomograma MRI-targeted.</p>
+    <div class="creatorHero" aria-label="Autoría de la aplicación">
+      <div><span class="kicker">Autoría</span><span class="name">Ángel Borque-Fernando · Servicio de Urología, Hospital Universitario Miguel Servet</span></div>
+      <div class="desc">Herramienta para cálculo aproximado del nomograma de Briganti 2019 de afectación ganglionar a partir de RM.</div>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <section class="grid">
+    <div class="card">
+      <h2>Datos del paciente</h2>
+      <label for="pid">ID / referencia <span class="hint">Opcional. No introduzcas datos identificativos si vas a compartir el archivo.</span></label>
+      <input id="pid" placeholder="Ej. Caso 001" autocomplete="off" />
+      <div class="row">
+        <div>
+          <label for="psa">PSA preoperatorio</label>
+          <input id="psa" type="number" inputmode="decimal" min="0" max="80" step="0.1" value="10" />
+          <span class="hint">ng/ml. Rango del nomograma: 0–80.</span>
+        </div>
+        <div>
+          <label for="dmax">Diámetro lesión índice</label>
+          <input id="dmax" type="number" inputmode="decimal" min="0" max="45" step="0.1" value="15" />
+          <span class="hint">mm. Rango del nomograma: 0–45.</span>
+        </div>
+      </div>
+      <label for="stage">Estadio clínico en mpMRI</label>
+      <select id="stage">
+        <option value="organ">Órgano-confinado</option>
+        <option value="ece">Extensión extracapsular</option>
+        <option value="svi">Invasión vesículas seminales</option>
+      </select>
+      <label for="gg">Grade Group en biopsia dirigida por RM</label>
+      <select id="gg">
+        <option value="gg12">GG 1–2</option>
+        <option value="gg3" selected>GG 3</option>
+        <option value="gg45">GG 4–5</option>
+      </select>
+      <div class="row">
+        <div>
+          <label for="sbx">Cilindros sistemáticos con csPCa</label>
+          <input id="sbx" type="number" inputmode="decimal" min="0" max="100" step="1" value="30" />
+          <span class="hint">%. csPCa = GG ≥2.</span>
+        </div>
+        <div>
+          <label for="threshold">Umbral de decisión</label>
+          <input id="threshold" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="7" />
+          <span class="hint">%. Por defecto: 7%.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resultBox">
+      <h2>Resultado</h2>
+      <div class="risk">
+        <div class="label">Riesgo estimado de LNI</div>
+        <div id="riskNum" class="num">—</div>
+        <span id="riskBadge" class="badge">—</span>
+      </div>
+      <div id="recommend" class="recommend">Introduce los datos para calcular.</div>
+      <div class="metrics">
+        <div class="metric"><b id="points">—</b><span>Total points</span></div>
+        <div class="metric"><b id="psaPts">—</b><span>Puntos PSA</span></div>
+        <div class="metric"><b id="mriPts">—</b><span>Puntos mpMRI</span></div>
+        <div class="metric"><b id="ggPts">—</b><span>Puntos GG</span></div>
+      </div>
+      <div class="actions noPrint">
+        <button class="primary" id="saveBtn">Guardar en lotes</button>
+        <button class="secondary" onclick="window.print()">Imprimir informe</button>
+        <button class="secondary" id="csvBtn">Exportar CSV</button>
+        <button class="danger" id="clearBtn">Borrar lotes</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid span">
+    <div class="card">
+      <h2>Warning / aviso de uso</h2>
+      <div class="warning">
+        Esta app reconstruye el cálculo a partir de la Figura 1 del nomograma y de las OR del Modelo 5 de la Tabla 2. Es una aproximación de alta fidelidad para apoyo clínico, pero no sustituye una herramienta oficialmente validada ni el juicio clínico. El modelo es aplicable a pacientes diagnosticados con biopsia dirigida por RM positiva y biopsia sistemática concomitante, tratados con prostatectomía radical y considerados para ePLND.
+      </div>
+      <p class="small">Referencia: Gandaglia G, Ploussard G, Valerio M, et al. Eur Urol. 2019;75(3):506–514. doi:10.1016/j.eururo.2018.10.012.</p>
+    </div>
+    <div class="card noPrint">
+      <h2>Registros guardados</h2>
+      <div class="tableWrap">
+        <table id="historyTable">
+          <thead><tr><th>Fecha</th><th>ID</th><th>PSA</th><th>mpMRI</th><th>Dmax</th><th>GG</th><th>SBx%</th><th>Riesgo</th><th>Recomendación</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div>Datos guardados localmente en el dispositivo. No se envían a ningún servidor.</div>
+    <div class="credit">© Ángel Borque-Fernando · Servicio de Urología, Hospital Universitario Miguel Servet</div>
+  </footer>
+</main>
+<script>
+const C = {
+  riskIntercept:-4.55839496,
+  riskSlope:0.03329963,
+  psaPerNg:1.25,
+  stage:{organ:0,ece:36.625,svi:44.170},
+  gg:{gg12:0,gg3:36.175,gg45:54.261},
+  dmaxPerMm:0.9367111111111112,
+  sbxPerPct:0.35874
+};
+const labels = {
+  stage:{organ:'Órgano-confinado',ece:'Extensión extracapsular',svi:'Invasión vesículas seminales'},
+  gg:{gg12:'GG 1–2',gg3:'GG 3',gg45:'GG 4–5'}
+};
+const $ = id => document.getElementById(id);
+function clamp(x,min,max){ x=Number(x); if(!isFinite(x)) return 0; return Math.max(min, Math.min(max, x)); }
+function calc(){
+  const psa = clamp($('psa').value,0,80);
+  const dmax = clamp($('dmax').value,0,45);
+  const sbx = clamp($('sbx').value,0,100);
+  const st = $('stage').value, gg = $('gg').value;
+  const pPSA = psa*C.psaPerNg;
+  const pStage = C.stage[st];
+  const pDmax = dmax*C.dmaxPerMm;
+  const pGG = C.gg[gg];
+  const pSBx = sbx*C.sbxPerPct;
+  const total = pPSA+pStage+pDmax+pGG+pSBx;
+  const prob = 1/(1+Math.exp(-(C.riskIntercept+C.riskSlope*total)));
+  return {psa,dmax,sbx,st,gg,pPSA,pStage,pDmax,pGG,pSBx,total,prob,threshold:clamp($('threshold').value,0,100)/100,id:$('pid').value.trim()};
+}
+function category(prob){
+  if(prob < 0.05) return {text:'Bajo riesgo', cls:'green'};
+  if(prob < 0.07) return {text:'Zona gris: individualizar', cls:'amber'};
+  return {text:'≥7%: considerar ePLND', cls:'red'};
+}
+function render(){
+  const r=calc(), cat=category(r.prob);
+  $('riskNum').textContent = (r.prob*100).toFixed(1)+'%';
+  $('riskBadge').textContent = cat.text;
+  $('riskBadge').className = 'badge '+cat.cls;
+  const rec = r.prob >= r.threshold ? 'Riesgo igual o superior al umbral seleccionado: considerar ePLND si el contexto clínico lo confirma.' : 'Riesgo por debajo del umbral seleccionado: ePLND no recomendada por la calculadora.';
+  $('recommend').textContent = rec;
+  $('recommend').className = 'recommend '+(r.prob>=r.threshold?'red':'green');
+  $('points').textContent = r.total.toFixed(1);
+  $('psaPts').textContent = r.pPSA.toFixed(1);
+  $('mriPts').textContent = r.pStage.toFixed(1);
+  $('ggPts').textContent = r.pGG.toFixed(1);
+  return r;
+}
+function getHistory(){ return JSON.parse(localStorage.getItem('briganti2019_history')||'[]'); }
+function setHistory(arr){ localStorage.setItem('briganti2019_history', JSON.stringify(arr)); drawHistory(); }
+function drawHistory(){
+  const tbody = document.querySelector('#historyTable tbody'); tbody.innerHTML='';
+  getHistory().slice().reverse().forEach(x=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${x.date}</td><td>${escapeHtml(x.id||'')}</td><td>${x.psa}</td><td>${x.stage}</td><td>${x.dmax}</td><td>${x.gg}</td><td>${x.sbx}</td><td>${(x.prob*100).toFixed(1)}%</td><td>${x.rec}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+$('saveBtn').addEventListener('click',()=>{
+  const r=render();
+  const rec = r.prob >= r.threshold ? 'Considerar ePLND' : 'ePLND no recomendada';
+  const entry={date:new Date().toLocaleString(), id:r.id, psa:r.psa, stage:labels.stage[r.st], dmax:r.dmax, gg:labels.gg[r.gg], sbx:r.sbx, threshold:r.threshold, total:r.total, prob:r.prob, rec};
+  const h=getHistory(); h.push(entry); setHistory(h);
+});
+$('clearBtn').addEventListener('click',()=>{ if(confirm('¿Borrar todos los registros guardados en este dispositivo?')) setHistory([]); });
+$('csvBtn').addEventListener('click',()=>{
+  const h=getHistory();
+  const header=['Fecha','ID','PSA','Estadio mpMRI','Dmax mm','GG TBx','SBx csPCa %','Umbral','Total points','Probabilidad LNI','Recomendación'];
+  const rows=h.map(x=>[x.date,x.id,x.psa,x.stage,x.dmax,x.gg,x.sbx,x.threshold,x.total,x.prob,x.rec]);
+  const csv=[header,...rows].map(row=>row.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='briganti2019_lotes.csv'; a.click(); URL.revokeObjectURL(a.href);
+});
+['pid','psa','dmax','sbx','stage','gg','threshold'].forEach(id=>$(id).addEventListener('input',render));
+render(); drawHistory();
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); }
+</script>
+</body>
+</html>
