@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f4c81" />
+  <title>Briganti Nomograms 2012–2023</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon-192.png" />
+  <style>
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --ink:#132238; --muted:#5d6b7a;
+      --primary:#0f4c81; --primary2:#1769aa; --line:#d8e1ec;
+      --green:#0f7b4a; --amber:#b7791f; --red:#b91c1c; --softblue:#e8f2fb;
+      --shadow:0 8px 24px rgba(15,76,129,.12); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    header{background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;padding:22px 18px 25px;border-bottom-left-radius:26px;border-bottom-right-radius:26px;box-shadow:var(--shadow)}
+    .wrap{max-width:1020px;margin:0 auto;padding:0 14px 24px}
+    h1{font-size:1.43rem;margin:0 0 4px;font-weight:780;letter-spacing:.1px}
+    .subtitle{font-size:.92rem;opacity:.92;margin:0}
+    .creatorHero{margin-top:10px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.24);border-radius:13px;padding:9px 11px;box-shadow:0 5px 14px rgba(0,0,0,.05)}
+    .creatorHero .kicker{display:inline;font-size:.70rem;text-transform:uppercase;letter-spacing:.06em;font-weight:760;opacity:.78;margin-right:6px}
+    .creatorHero .name{display:inline;font-size:.88rem;font-weight:760;line-height:1.22}
+    .creatorHero .desc{font-size:.76rem;opacity:.86;margin-top:3px;line-height:1.28}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px}
+    @media(min-width:900px){.grid{grid-template-columns:1.05fr .95fr}.span{grid-column:1/-1}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .card h2{font-size:1.05rem;margin:0 0 12px;color:var(--primary)}
+    label{display:block;font-weight:680;margin:12px 0 6px}
+    .hint{display:block;color:var(--muted);font-size:.82rem;font-weight:500;margin-top:2px}
+    input,select,textarea{width:100%;font:inherit;padding:12px 11px;border:1px solid #bcc9d8;border-radius:12px;background:#fff;color:var(--ink)}
+    textarea{min-height:120px;resize:vertical}
+    .charCount{text-align:right;color:var(--muted);font-size:.78rem;margin-top:4px}
+    input:focus,select:focus,textarea:focus{outline:3px solid #cce6ff;border-color:var(--primary2)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:430px){.row{grid-template-columns:1fr}}
+    .modelSelect{background:#eef6fd;border:1px solid #c5dcef;border-radius:15px;padding:12px;margin-bottom:10px}
+    .modelInfo{margin-top:8px;font-size:.86rem;color:#31506d;background:#fff;border:1px dashed #b7cce1;border-radius:12px;padding:9px 10px}
+    .resultBox{display:grid;gap:12px}
+    .risk{padding:18px;border-radius:16px;background:var(--softblue);text-align:center;border:1px solid #c5dcef;transition:background .2s,border-color .2s,color .2s}
+    .risk .num{font-size:2.45rem;font-weight:800;color:var(--primary);line-height:1;margin:6px 0;transition:color .2s}
+    .risk .label{color:var(--muted);font-weight:600}
+    .risk.green{background:#e7f6ed;border-color:#b7e1c8}
+    .risk.green .num{color:var(--green)}
+    .risk.amber{background:#fff6df;border-color:#eed49a}
+    .risk.amber .num{color:var(--amber)}
+    .risk.red{background:#fde8e8;border-color:#f5b8b8}
+    .risk.red .num{color:var(--red)}
+    .badge{display:inline-block;padding:8px 12px;border-radius:999px;font-weight:760;font-size:.92rem}
+    .badge.green{background:#dff4e9;color:var(--green)}
+    .badge.amber{background:#fff1d6;color:var(--amber)}
+    .badge.red{background:#fee2e2;color:var(--red)}
+    .recommend{border-radius:14px;padding:12px 13px;font-weight:680}
+    .recommend.green{background:#e7f6ed;color:var(--green);border:1px solid #b7e1c8}
+    .recommend.amber{background:#fff6df;color:#8a5b12;border:1px solid #eed49a}
+    .recommend.red{background:#fde8e8;color:var(--red);border:1px solid #f5b8b8}
+    .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .metric{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px}
+    .metric b{display:block;color:var(--primary);font-size:1.05rem;word-break:break-word}
+    .metric span{font-size:.78rem;color:var(--muted)}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    button{font:inherit;font-weight:750;border:0;border-radius:13px;padding:12px 10px;cursor:pointer}
+    .primary{background:var(--primary);color:white}.secondary{background:#e6edf5;color:#17324d}.danger{background:#fee2e2;color:var(--red)}
+    .warning{background:#fff7d6;border:1px solid #ead58f;color:#514018;border-radius:14px;padding:12px;font-size:.87rem}
+    table{width:100%;border-collapse:collapse;font-size:.84rem;overflow:hidden;border-radius:12px}
+    th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{background:#eef4fa;color:#24425d;font-weight:760}
+    .tableWrap{overflow:auto;max-height:360px;border:1px solid var(--line);border-radius:14px}
+    .small{font-size:.82rem;color:var(--muted)}
+    .formula{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px;white-space:pre-wrap;font-size:.76rem;overflow:auto}
+    .inputGrid{display:grid;grid-template-columns:1fr;gap:0}
+    .noteBox{border-left:4px solid var(--primary);background:#f8fbff;border-radius:12px;padding:10px 12px;color:#294865;font-size:.86rem}
+
+    .cutoffBox{margin-top:12px;background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:12px}
+    .cutoffBox h3{margin:0 0 8px;font-size:.95rem;color:var(--primary)}
+    .zoneList{display:grid;gap:8px}
+    .zoneItem{border-radius:12px;padding:9px 10px;font-size:.84rem;border:1px solid var(--line)}
+    .zoneItem.green{background:#e7f6ed;color:#0f5132;border-color:#b7e1c8}
+    .zoneItem.amber{background:#fff6df;color:#66420d;border-color:#eed49a}
+    .zoneItem.red{background:#fde8e8;color:#842029;border-color:#f5b8b8}
+    .zoneItem b{display:block;margin-bottom:2px}
+
+    .refs{display:grid;gap:10px;margin-top:8px}
+    .refItem{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.82rem;color:#25364a}
+    .refItem b{color:var(--primary)}
+    .refItem .doi{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;color:#4f657c}
+    footer{padding:18px 4px;color:var(--muted);font-size:.78rem;text-align:center}
+    footer .credit{margin-top:6px;font-size:.72rem;opacity:.75}
+    @media print{header,.actions,.noPrint{display:none!important}body{background:white}.card{box-shadow:none;border:1px solid #ccc}.grid{display:block}.card{margin-bottom:14px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Briganti Nomograms 2012–2023</h1>
+    <p class="subtitle">Calculadora móvil conjunta para estimar riesgo de afectación ganglionar — LNI — y apoyar la decisión de ePLND.</p>
+    <div class="creatorHero" aria-label="Autoría de la aplicación">
+      <div><span class="kicker">Autoría</span><span class="name">Ángel Borque-Fernando · Servicio de Urología, Hospital Universitario Miguel Servet</span></div>
+      <div class="desc">Herramienta para cálculo aproximado de los nomogramas Briganti 2012, 2017, 2019 y 2023 usando interceptos y coeficientes publicados.</div>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <section class="grid">
+    <div class="card">
+      <h2>Modelo y datos del paciente</h2>
+      <div class="modelSelect">
+        <label for="model" style="margin-top:0">Nomograma</label>
+        <select id="model">
+          <option value="b2012">Briganti 2012 — biopsia sistemática TRUS clásica</option>
+          <option value="b2017">Briganti 2017 — biopsia sistemática, Grade Group y carga tumoral</option>
+          <option value="b2019" selected>Briganti 2019 — RM + biopsia dirigida + sistemática</option>
+          <option value="b2023">Briganti 2023 — RM + PSMA PET miN0M0</option>
+        </select>
+        <div id="modelInfo" class="modelInfo"></div>
+      </div>
+      <label for="pid">ID / referencia <span class="hint">Opcional. Evita datos identificativos si vas a compartir registros.</span></label>
+      <input id="pid" placeholder="Ej. Caso 001" autocomplete="off" />
+      <div id="inputs" class="inputGrid"></div>
+      <label for="observaciones">Observaciones <span class="hint">Texto libre opcional. Máximo 3000 caracteres.</span></label>
+      <textarea id="observaciones" maxlength="3000" placeholder="Escribe aquí observaciones clínicas, contexto de imagen, biopsia, comorbilidad, decisión del comité, etc."></textarea>
+      <div id="obsCount" class="charCount">0 / 3000</div>
+    </div>
+
+    <div class="card resultBox">
+      <h2>Resultado</h2>
+      <div id="riskBox" class="risk">
+        <div class="label">Riesgo estimado de LNI</div>
+        <div id="riskNum" class="num">—</div>
+        <span id="riskBadge" class="badge">—</span>
+      </div>
+      <div id="recommend" class="recommend">Introduce los datos para calcular.</div>
+      <div class="metrics">
+        <div class="metric"><b id="linearPredictor">—</b><span>Predictor lineal Xβ</span></div>
+        <div class="metric"><b id="thresholdShown">7.0%</b><span>Umbral seleccionado</span></div>
+        <div class="metric"><b id="modelShown">—</b><span>Modelo</span></div>
+        <div class="metric"><b id="rangeStatus">—</b><span>Estado de rangos</span></div>
+      </div>
+      <div class="actions noPrint">
+        <button class="primary" id="saveBtn">Guardar en lotes</button>
+        <button class="secondary" onclick="window.print()">Imprimir informe</button>
+        <button class="secondary" id="csvBtn">Exportar CSV</button>
+        <button class="danger" id="clearBtn">Borrar lotes</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid span">
+    <div class="card">
+      <h2>Interpretación y uso adecuado</h2>
+      <div class="warning" id="useWarning"></div>
+      <p class="small">El resultado es un porcentaje de riesgo de afectación ganglionar. Calculations alone should never dictate patient care; debe integrarse con el juicio clínico, contexto quirúrgico, guías y preferencias del paciente.</p>
+      <div class="noteBox" id="modelClinicalNote"></div>
+
+      <div class="cutoffBox" id="cutoffInfo">
+        <h3>Puntos de corte para interpretar el riesgo</h3>
+        <div class="zoneList">
+          <div class="zoneItem green"><b>Zona verde: &lt;5%</b>Riesgo bajo de afectación ganglionar. En general, la ePLND no estaría recomendada por el nomograma, salvo factores clínicos adicionales.</div>
+          <div class="zoneItem amber"><b>Zona intermedia: 5–&lt;7%</b>Zona gris. Conviene individualizar la decisión según contexto clínico, calidad de la RM/biopsia, comorbilidad, preferencias del paciente y criterio del comité.</div>
+          <div class="zoneItem red"><b>Zona roja: ≥7%</b>Riesgo igual o superior al umbral operativo usado en la app. Considerar ePLND si el contexto quirúrgico y clínico lo confirma.</div>
+        </div>
+        <p class="small" style="margin:10px 0 0">El umbral principal de la app es editable; por defecto se usa 7%. La estratificación en tres zonas se muestra como ayuda interpretativa y no sustituye el juicio clínico.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Fórmula y coeficientes usados</h2>
+      <div class="formula" id="formulaBox"></div>
+    </div>
+  </section>
+
+  <section class="grid span">
+    <div class="card noPrint">
+      <h2>Registros guardados</h2>
+      <div class="tableWrap">
+        <table id="historyTable">
+          <thead><tr><th>Fecha</th><th>ID</th><th>Modelo</th><th>Inputs</th><th>Observaciones</th><th>Xβ</th><th>Riesgo</th><th>Recomendación</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Referencias bibliográficas completas</h2>
+      <p class="small">Coeficientes implementados según el manual de Evidencio para Briganti Nomogram v1.0 y las publicaciones originales de cada modelo.</p>
+      <div class="refs">
+        <div class="refItem"><b>Briganti 2012.</b> Briganti A, Larcher A, Abdollah F, Capitanio U, Gallina A, Suardi N, Bianchi M, Sun M, Freschi M, Salonia A, Karakiewicz PI, Rigatti P, Montorsi F. Updated nomogram predicting lymph node invasion in patients with prostate cancer undergoing extended pelvic lymph node dissection: the essential importance of percentage of positive cores. <i>European Urology</i>. 2012;61(3):480-487. <span class="doi">doi:10.1016/j.eururo.2011.10.044</span></div>
+        <div class="refItem"><b>Briganti 2017.</b> Gandaglia G, Fossati N, Zaffuto E, Bandini M, Dell'Oglio P, Bravi CA, Fallara G, Pellegrino F, Nocera L, Karakiewicz PI, Tian Z, Freschi M, Montironi R, Montorsi F, Briganti A. Development and Internal Validation of a Novel Model to Identify the Candidates for Extended Pelvic Lymph Node Dissection in Prostate Cancer. <i>European Urology</i>. 2017;72(4):632-640. <span class="doi">doi:10.1016/j.eururo.2017.03.049</span></div>
+        <div class="refItem"><b>Briganti 2019.</b> Gandaglia G, Ploussard G, Valerio M, Mattei A, Fiori C, Fossati N, Stabile A, Beauval JB, Malavaud B, Roumiguié M, Robesti D, Dell'Oglio P, Moschini M, Zamboni S, Rakauskas A, De Cobelli F, Porpiglia F, Montorsi F, Briganti A. A Novel Nomogram to Identify Candidates for Extended Pelvic Lymph Node Dissection Among Patients with Clinically Localized Prostate Cancer Diagnosed with Magnetic Resonance Imaging-targeted and Systematic Biopsies. <i>European Urology</i>. 2019;75(3):506-514. <span class="doi">doi:10.1016/j.eururo.2018.10.012</span></div>
+        <div class="refItem"><b>Briganti 2023.</b> Gandaglia G, Barletta F, Robesti D, Scuderi S, Rajwa P, Gomez Rivas J, Ibanez L, Soeterik TFW, Bianchi L, Afferi L, Kesch C, Darr C, Guo H, Zhuang J, Zattoni F, Fendler W, Marra G, Stabile A, Amparore D, Huebner NA, Giesen A, Joniau S, Schiavina R, Brunocilla E, Mattei A, Dal Moro F, Moreno Sierra J, Porpiglia F, Picchio M, van den Bergh R, Shariat SF, Montorsi F, Briganti A. Identification of the Optimal Candidates for Nodal Staging with Extended Pelvic Lymph Node Dissection Among Prostate Cancer Patients Who Underwent Preoperative Prostate-specific Membrane Antigen Positron Emission Tomography. External Validation of the Memorial Sloan Kettering Cancer Center and Briganti Nomograms and Development of a Novel Tool. <i>European Urology Oncology</i>. 2023;6(6):543-552. <span class="doi">doi:10.1016/j.euo.2023.05.003</span></div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div>Datos guardados localmente en el dispositivo. No se envían a ningún servidor.</div>
+    <div class="credit">© Ángel Borque-Fernando · Servicio de Urología, Hospital Universitario Miguel Servet</div>
+  </footer>
+</main>
+<script>
+const models = {
+  b2012:{
+    short:'Briganti 2012', thresholdDefault:7,
+    ref:'Briganti A, Larcher A, Abdollah F, et al. European Urology. 2012;61(3):480-487. doi:10.1016/j.eururo.2011.10.044',
+    info:'Modelo clásico basado en PSA, estadio clínico, Gleason primario/secundario y % de cilindros positivos en biopsia sistemática TRUS.',
+    note:'Uso preferente: pacientes diagnosticados mediante biopsia sistemática convencional, sin escenario MRI-targeted específico.',
+    intercept:-5.34,
+    fields:[
+      {id:'psa', label:'PSA', type:'number', value:10, min:0, max:50, step:0.1, unit:'ng/ml', beta:0.036331929, desc:'Prostate Specific Antigen. Rango publicado 0–50.'},
+      {id:'ct', label:'Clinical T-stage', type:'select', value:'T2', options:[['T1','Stage T1',0],['T2','Stage T2',0.590006422],['T3','Stage T3',1.994700313]], desc:'Estadio clínico T.'},
+      {id:'pgg', label:'Primary biopsy Gleason grade', type:'select', value:'le3', options:[['le3','≤3',0],['ge4','≥4',1.295822458]], desc:'Gleason primario en biopsia.'},
+      {id:'sgg', label:'Secondary biopsy Gleason grade', type:'select', value:'le3', options:[['le3','≤3',0],['ge4','≥4',0.371563556]], desc:'Gleason secundario en biopsia.'},
+      {id:'poscores', label:'Percentage of positive cores', type:'number', value:30, min:0, max:100, step:0.1, unit:'%', beta:0.027128667, desc:'% de cilindros positivos en biopsia sistemática.'}
+    ]
+  },
+  b2017:{
+    short:'Briganti 2017', thresholdDefault:7,
+    ref:'Gandaglia G, Fossati N, Zaffuto E, et al. European Urology. 2017;72(4):632-640. doi:10.1016/j.eururo.2017.03.049',
+    info:'Actualización del modelo clásico: PSA, estadio clínico, Grade Group y porcentaje de cilindros con enfermedad de mayor y menor grado.',
+    note:'Uso preferente: biopsia sistemática con información detallada de carga tumoral por mayor y menor grado.',
+    intercept:-5.8717,
+    fields:[
+      {id:'psa', label:'Preoperative PSA', type:'number', value:10, min:0, max:50, step:0.1, unit:'ng/ml', beta:0.0826, desc:'PSA preoperatorio. Rango publicado 0–50.'},
+      {id:'ct', label:'Clinical T stage', type:'select', value:'T2', options:[['T1','Clinical Stage T1',0],['T2','Clinical Stage T2',0.8489],['T3','Clinical Stage T3',1.055]], desc:'Estadio clínico por tacto rectal.'},
+      {id:'gg', label:'Biopsy Gleason Grade Group', type:'select', value:'3', options:[['1','GG 1',0],['2','GG 2',0],['3','GG 3',2.2664],['4','GG 4',2.6753],['5','GG 5',2.6753]], desc:'Grade Group de biopsia.'},
+      {id:'pctHigh', label:'% positive cores with highest-grade PCa', type:'number', value:25, min:0, max:100, step:0.1, unit:'%', beta:0.0268, desc:'% de cilindros con enfermedad de mayor grado.'},
+      {id:'pctLow', label:'% positive cores with lower-grade PCa', type:'number', value:20, min:0, max:90, step:0.1, unit:'%', beta:0.0140, desc:'% de cilindros con enfermedad de menor grado. Rango publicado 0–90.'}
+    ]
+  },
+  b2019:{
+    short:'Briganti 2019', thresholdDefault:7,
+    ref:'Gandaglia G, Ploussard G, Valerio M, et al. European Urology. 2019;75(3):506-514. doi:10.1016/j.eururo.2018.10.012',
+    info:'Modelo adaptado a RM multiparamétrica con biopsia dirigida positiva y biopsia sistemática concomitante.',
+    note:'Aplicable exclusivamente a varones con biopsia dirigida por RM positiva y biopsia sistemática concomitante. No usar si solo hay biopsia sistemática o si la biopsia dirigida es negativa.',
+    intercept:-4.5974,
+    fields:[
+      {id:'psa', label:'Preoperative PSA', type:'number', value:10, min:0, max:50, step:0.1, unit:'ng/ml', beta:0.0416, desc:'PSA preoperatorio. Rango publicado 0–50.'},
+      {id:'mriStage', label:'Clinical stage at mpMRI', type:'select', value:'organ', options:[['organ','Organ confined',0],['ece','Extracapsular extension',1.2214],['svi','Seminal vesicle invasion',1.4672]], desc:'Estadio clínico en RM multiparamétrica.'},
+      {id:'dmax', label:'Maximum lesion diameter at mpMRI', type:'number', value:15, min:0, max:45, step:1, unit:'mm', beta:0.0311, desc:'Lesión con mayor PI-RADS o de mayor diámetro si empate. Rango publicado 0–45.'},
+      {id:'ggTbx', label:'Biopsy Gleason grade group at MRI-targeted biopsy', type:'select', value:'3', options:[['1','GG 1',0],['2','GG 2',0],['3','GG 3',1.2032],['4','GG 4',1.8063],['5','GG 5',1.8063]], desc:'Grade Group en biopsia dirigida por RM.'},
+      {id:'pctCsSbx', label:'% cores with clinically significant PCa at systematic biopsy', type:'number', value:30, min:0, max:100, step:0.1, unit:'%', beta:0.0119, desc:'csPCa definido como Grade Group ≥2 en biopsia sistemática.'}
+    ]
+  },
+  b2023:{
+    short:'Briganti 2023', thresholdDefault:7,
+    ref:'Gandaglia G, Barletta F, Robesti D, et al. European Urology Oncology. 2023;6(6):543-552. doi:10.1016/j.euo.2023.05.003',
+    info:'Modelo contemporáneo para pacientes miN0M0 tras PSMA PET preoperatorio, con RM y datos de biopsia.',
+    note:'Uso preferente: pacientes con enfermedad miN0M0, sin lesiones ganglionares o metastásicas sospechosas en PSMA PET, candidatos a prostatectomía radical y ePLND.',
+    intercept:-4.807,
+    fields:[
+      {id:'psa', label:'Preoperative PSA', type:'number', value:10, min:0, max:50, step:0.1, unit:'ng/ml', beta:0.0085, desc:'PSA preoperatorio. Rango publicado 0–50.'},
+      {id:'mriStage', label:'Clinical stage at mpMRI', type:'select', value:'organ', options:[['organ','Organ confined',0],['ece','Extracapsular extension',0.7288],['svi','Seminal vesicle invasion',1.3835]], desc:'Estadio clínico en RM multiparamétrica.'},
+      {id:'dmax', label:'Maximum lesion diameter at mpMRI', type:'number', value:15, min:0, max:45, step:1, unit:'mm', beta:0.0489, desc:'Lesión con mayor PI-RADS o mayor diámetro. Rango publicado 0–45.'},
+      {id:'gg', label:'Biopsy Gleason Grade', type:'select', value:'4', options:[['1','GG 1',0],['2','GG 2',0],['3','GG 3',0],['4','GG 4',0],['5','GG 5',0.8757]], desc:'Grade Group de biopsia.'},
+      {id:'pctCsSbx', label:'% cores with clinically significant PCa at systematic biopsy', type:'number', value:40, min:0, max:100, step:0.1, unit:'%', beta:0.0160, desc:'% de cilindros con csPCa en biopsia sistemática.'}
+    ]
+  }
+};
+const $ = id => document.getElementById(id);
+function clamp(x,min,max){ x=Number(x); if(!isFinite(x)) return 0; return Math.max(min, Math.min(max, x)); }
+function category(prob, threshold){
+  if(prob < 0.05) return {text:'Bajo riesgo (<5%)', cls:'green'};
+  if(prob < threshold) return {text:'Zona gris / individualizar', cls:'amber'};
+  return {text:'≥ umbral: considerar ePLND', cls:'red'};
+}
+function currentModel(){ return models[$('model').value]; }
+function renderInputs(){
+  const m=currentModel();
+  $('modelInfo').textContent=m.info;
+  $('useWarning').textContent='Aviso específico: '+m.note;
+  $('modelClinicalNote').textContent=m.note;
+  const root=$('inputs'); root.innerHTML='';
+  m.fields.forEach((f, idx)=>{
+    const box=document.createElement('div');
+    if(f.type==='number'){
+      box.innerHTML=`<label for="${f.id}">${f.label}</label><input id="${f.id}" type="number" inputmode="decimal" min="${f.min}" max="${f.max}" step="${f.step}" value="${f.value}"><span class="hint">${f.desc}${f.unit?` · Unidad: ${f.unit}`:''}</span>`;
+    } else {
+      const opts=f.options.map(o=>`<option value="${o[0]}" ${o[0]===f.value?'selected':''}>${o[1]}</option>`).join('');
+      box.innerHTML=`<label for="${f.id}">${f.label}</label><select id="${f.id}">${opts}</select><span class="hint">${f.desc}</span>`;
+    }
+    root.appendChild(box);
+  });
+  const thr=document.createElement('div');
+  thr.innerHTML=`<label for="threshold">Umbral de decisión</label><input id="threshold" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="${m.thresholdDefault}"><span class="hint">%. Por defecto se muestra 7%; modifica según criterio local o guías.</span>`;
+  root.appendChild(thr);
+  root.querySelectorAll('input,select').forEach(el=>el.addEventListener('input', render));
+  updateFormulaBox();
+  render();
+}
+function getFieldValue(f){
+  const el=$(f.id);
+  if(f.type==='number'){
+    const raw=Number(el.value);
+    const val=clamp(raw,f.min,f.max);
+    const clipped=(raw!==val);
+    return {label:f.label, value:val, raw:raw, beta:f.beta, contribution:val*f.beta, display:`${val}${f.unit?` ${f.unit}`:''}`, clipped};
+  }
+  const opt=f.options.find(o=>o[0]===el.value) || f.options[0];
+  return {label:f.label, value:opt[0], beta:opt[2], contribution:opt[2], display:opt[1], clipped:false};
+}
+function calc(){
+  const key=$('model').value, m=models[key];
+  const parts=m.fields.map(getFieldValue);
+  const xb=m.intercept+parts.reduce((s,p)=>s+p.contribution,0);
+  const prob=Math.exp(xb)/(1+Math.exp(xb));
+  const threshold=clamp($('threshold').value,0,100)/100;
+  return {key,m,parts,xb,prob,threshold,id:$('pid').value.trim(), observaciones:$('observaciones').value.slice(0,3000), clipped:parts.some(p=>p.clipped)};
+}
+function render(){
+  const r=calc();
+  const cat=category(r.prob,r.threshold);
+  $('riskNum').textContent=(r.prob*100).toFixed(1)+'%';
+  $('riskBadge').textContent=cat.text;
+  $('riskBadge').className='badge '+cat.cls;
+  $('riskBox').className='risk '+cat.cls;
+  $('recommend').textContent=r.prob>=r.threshold ? 'Riesgo igual o superior al umbral seleccionado: considerar ePLND si el contexto clínico lo confirma.' : 'Riesgo por debajo del umbral seleccionado: ePLND no recomendada por la calculadora.';
+  $('recommend').className='recommend '+(r.prob>=r.threshold?'red':(r.prob>=0.05?'amber':'green'));
+  $('linearPredictor').textContent=r.xb.toFixed(4);
+  $('thresholdShown').textContent=(r.threshold*100).toFixed(1)+'%';
+  $('modelShown').textContent=r.m.short;
+  $('rangeStatus').textContent=r.clipped?'Algún valor recortado a rango':'Dentro de rango';
+  return r;
+}
+function updateFormulaBox(){
+  const m=currentModel();
+  const lines=[];
+  lines.push(`${m.short}`);
+  lines.push(`P = exp(Xβ) / (1 + exp(Xβ))`);
+  lines.push(`Intercepto = ${m.intercept}`);
+  m.fields.forEach(f=>{
+    if(f.type==='number') lines.push(`${f.label}: β = ${f.beta}`);
+    else lines.push(`${f.label}: ${f.options.map(o=>`${o[1]}=${o[2]}`).join('; ')}`);
+  });
+  $('formulaBox').textContent='Referencia seleccionada: '+m.ref+'\n\n'+lines.join('\n');
+}
+function getHistory(){ return JSON.parse(localStorage.getItem('briganti_all_history')||'[]'); }
+function setHistory(arr){ localStorage.setItem('briganti_all_history', JSON.stringify(arr)); drawHistory(); }
+function drawHistory(){
+  const tbody=document.querySelector('#historyTable tbody'); tbody.innerHTML='';
+  getHistory().slice().reverse().forEach(x=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${x.date}</td><td>${x.id||'—'}</td><td>${x.model}</td><td>${x.inputs}</td><td>${x.observaciones||'—'}</td><td>${x.xb}</td><td>${x.risk}</td><td>${x.rec}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+function save(){
+  const r=render();
+  const rec=r.prob>=r.threshold?'Considerar ePLND':'No recomendada por calculadora';
+  const inputs=r.parts.map(p=>`${p.label}: ${p.display}`).join(' | ');
+  const item={date:new Date().toLocaleString(), id:r.id, model:r.m.short, inputs, observaciones:r.observaciones, xb:r.xb.toFixed(4), risk:(r.prob*100).toFixed(1)+'%', rec};
+  const h=getHistory(); h.push(item); setHistory(h); alert('Registro guardado en lotes.');
+}
+function exportCSV(){
+  const h=getHistory();
+  const header=['Fecha','ID','Modelo','Inputs','Observaciones','Xb','Riesgo','Recomendación'];
+  const rows=[header].concat(h.map(x=>[x.date,x.id,x.model,x.inputs,x.observaciones||'',x.xb,x.risk,x.rec]));
+  const csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='briganti_nomograms_registros.csv'; a.click(); URL.revokeObjectURL(url);
+}
+$('model').addEventListener('change', renderInputs);
+$('saveBtn').addEventListener('click', save);
+$('csvBtn').addEventListener('click', exportCSV);
+$('clearBtn').addEventListener('click', ()=>{ if(confirm('¿Borrar todos los registros guardados?')) setHistory([]); });
+$('observaciones').addEventListener('input', ()=>{ $('obsCount').textContent = `${$('observaciones').value.length} / 3000`; });
+renderInputs(); drawHistory();
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); }
+</script>
+</body>
+</html>
